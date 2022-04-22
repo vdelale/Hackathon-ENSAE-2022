@@ -37,6 +37,6 @@ for i in tqdm(range(0, len(merged_df) - 10, 10)):
     )
     applied_df.columns = ["imbdid", "nb_women", "nb_men", "area_women", "area_men"]
 
-    with open("PosterAnalysis.json", "a") as json_file:
-        applied_df.to_json(json_file)
+    with open("PosterAnalysis.csv", "a") as csv_file:
+        applied_df.to_csv(csv_file, header=False, index=False)
 
