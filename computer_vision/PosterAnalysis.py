@@ -118,12 +118,17 @@ def analyse_img_from_url(
     :type poster_path: str
     :return: A tuple of the form (width, height, aspect_ratio, average_color)
     """
-
-    img = get_image(poster_path)
-    analysis = analyse_img(
-        img,
-        gender_detector=gender_detector,
-        face_detector=face_detector,
-        age_detector=age_detector,
-    )
+    try:
+        img = get_image(poster_path)
+    except:
+        return (0, 0, 0, 0)
+    try:
+        analysis = analyse_img(
+            img,
+            gender_detector=gender_detector,
+            face_detector=face_detector,
+            age_detector=age_detector,
+        )
+    except:
+        return (0, 0, 0, 0)
     return clean_outputs(analysis, img.shape[0], img.shape[1])
