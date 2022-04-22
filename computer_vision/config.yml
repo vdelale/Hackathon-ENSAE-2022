@@ -1,0 +1,3 @@
+base_url_for_poster : https://image.tmdb.org/t/p/w500
+detector_backend : 'retinaface'
+model_name : 'Facenet'
