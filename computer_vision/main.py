@@ -19,10 +19,10 @@ gender_detector = DeepFace.build_model("Gender")
 face_detector = FaceDetector.build_model(config["detector_backend"])
 age_detector = DeepFace.build_model("Age")
 
-for i in range(0, len(merged_df) - 10, 10):
+for i in tqdm(range(0, len(merged_df) - 10, 10)):
 
     line = merged_df.iloc[i : i + 10, :]
-    applied_df = line.progress_apply(
+    applied_df = line.apply(
         lambda row: (
             row["imdbid"],
             *analyse_img_from_url(
