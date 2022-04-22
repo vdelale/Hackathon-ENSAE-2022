@@ -93,7 +93,7 @@ def clean_outputs(
     nb_women, nb_men, area_men, area_women = 0, 0, 0, 0
     for result in face_analysis_results:
         if result[-1] / (w_img * l_img) < 1.0:
-            if result[1] == "Woman":
+            if result[0] == "Woman":
                 nb_women += 1
                 area_women += result[-1]
             else:
