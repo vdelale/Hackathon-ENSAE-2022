@@ -40,14 +40,15 @@ for genre in genres_global:
 #%% NLP analysis + PCA
 
 
-
+df["release_month"] = pd.to_datetime(df["release_date"]).dt.month
 df["collection"] = (df["belongs_to_collection"] is None)
+df["revenue_is_available"] = (df["revenue"] != 0)
 columns_to_remove = ["title_x", 
                      "imdbid", 
                      "id_x",
                      "adult",
                      "imdb_id",
-                     
+                     "overview",
                      "backdrop_path", 
                      "genres", 
                      "Genres", 
@@ -57,6 +58,17 @@ columns_to_remove = ["title_x",
                      "homepage", 
                      "id_y", 
                      "original_language", 
-                     "original_title", ]
+                     "original_title", 
+                     "poster_path",
+                     "status",
+                     "video",
+                     "spoken_languages",
+                     "tagline", 
+                     "title_y",
+                     "release_date"]
 
-df.drop(columns=columns_to_remove)
+columns_to_maybe_add_back = ["production_companies",
+                             "production_countries"]
+
+df = df.drop(columns=columns_to_remove + columns_to_maybe_add_back)
+# %%
