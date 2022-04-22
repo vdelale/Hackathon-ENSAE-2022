@@ -2,6 +2,7 @@
 *.pyc
 
 script_data.json
+data/script_data.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
