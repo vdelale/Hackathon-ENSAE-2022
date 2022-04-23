@@ -115,3 +115,5 @@ columns_to_scale = ["year",
 scaler = StandardScaler()
 df[columns_to_scale] = scaler.fit_transform(df[columns_to_scale])
 # %%
+
+df.to_csv('final_database.csv', index=False)
