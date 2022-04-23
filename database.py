@@ -10,9 +10,23 @@ YEARLY_INFLATION = 1.036
 
 
 df_bechdel = pd.read_json("data/bechdel_data.json")
+df_bechdel = df_bechdel[df_bechdel["imdbid"] != '']
+df_bechdel["imdbid"] = df_bechdel["imdbid"].astype(float).astype(str)
+
 df_tmdb = pd.read_json("data/tmdb_data.json")
-df_tmdb["imdbid"] = df_tmdb["imdb_id"].str[2:]
-df = pd.merge(df_bechdel, df_tmdb, "left", "imdbid")
+df_tmdb["imdbid"] = df_tmdb["imdb_id"].str[2:].astype(float).astype(str)
+
+df_poster = pd.read_csv("computer_vision/PosterAnalysis.csv")
+df_poster["imdbid"] = df_poster["imbdid"].astype(float).astype(str)
+
+df_genderCount = pd.read_csv("data/directors_writers_cast_score.csv")
+df_genderCount["imdbid"] = df_genderCount["imdbid"].astype(float).astype(str)
+df_genderCount.drop(columns=["title", "year", "id", "rating"], inplace=True)
+
+df_temp_1 = pd.merge(df_bechdel, df_tmdb, "inner", "imdbid")
+df_temp_2 = pd.merge(df_poster, df_temp_1, "inner", "imdbid")
+df = pd.merge(df_temp_2, df_genderCount, "inner", "imdbid")
+
 df = df[df['overview'].notna()]
 
 #%% Adding NLP columns based on the overviews (+ PCA)
@@ -51,6 +65,7 @@ df["budget"] = df["budget"] * (YEARLY_INFLATION ** (2022-df["year"]))
 df["revenue"] = df["revenue"] * (YEARLY_INFLATION ** (2022-df["year"]))
 columns_to_remove = ["title_x", 
                      "imdbid", 
+                     "imbdid",
                      "id_x",
                      "adult",
                      "imdb_id",
@@ -69,7 +84,10 @@ columns_to_remove = ["title_x",
                      "spoken_languages",
                      "tagline", 
                      "title_y",
-                     "release_date"]
+                     "release_date",
+                     "directors",
+                     "writers",
+                     "cast"]
 
 columns_to_maybe_add_back = ["production_companies",
                              "production_countries"]
@@ -83,7 +101,17 @@ columns_to_scale = ["year",
                     "runtime",
                     "vote_average",
                     "vote_count",
-                    "release_month"]
+                    "release_month",
+                    'directors_male', 
+                    'directors_female', 
+                    'writers_male', 
+                    'writers_female',
+                    'cast_male', 
+                    'cast_female',
+                    'nb_women', 
+                    'nb_men', 
+                    'area_women', 
+                    'area_men']
 scaler = StandardScaler()
 df[columns_to_scale] = scaler.fit_transform(df[columns_to_scale])
 # %%
