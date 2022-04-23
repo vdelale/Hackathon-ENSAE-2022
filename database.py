@@ -12,19 +12,11 @@ def inflation(row):
     return row["budget"] * (YEARLY_INFLATION ** (2022 - row["year"]))
 
 
-def parse_genres(x):
-    global genres_global
-    if x is np.nan:
-        return []
-    genres = []
-    for d in x:
-        genres.append(d["name"])
-        if d["name"] not in genres_global:
-            genres_global.append(d["name"])
-    return genres
 
+genres_global = []
 
 def main():
+    global genres_global
     df_bechdel = pd.read_json("data/bechdel_data.json")
     df_bechdel = df_bechdel[df_bechdel["imdbid"] != ""]
     df_bechdel["imdbid"] = df_bechdel["imdbid"].astype(float).astype(str)
@@ -47,7 +39,18 @@ def main():
 
     df = add_NLP_cols(df, N_PCA_NLP)
 
-    genres_global = []
+    
+    
+    def parse_genres(x):
+        global genres_global
+        if x is np.nan:
+            return []
+        genres = []
+        for d in x:
+            genres.append(d["name"])
+            if d["name"] not in genres_global:
+                genres_global.append(d["name"])
+        return genres
 
     df["Genres"] = df["genres"].apply(parse_genres)
 
