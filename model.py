@@ -16,7 +16,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.8, test_s
 
 
 params = {
-    'n_estimators':[100],
+    'n_estimators':[200],
     'min_child_weight':[4,5], 
     'gamma':[i/10.0 for i in range(3,6)],  
     'subsample':[i/10.0 for i in range(6,11)],
@@ -34,7 +34,7 @@ random_search = RandomizedSearchCV(clf,
                                    n_iter=n_iter_search, 
                                    cv=5,
                                    verbose=3,
-                                   scoring="f1_weighted",
+                                   scoring="accuracy",
                                    n_jobs=-1)
 
 start = time.time()
@@ -53,11 +53,14 @@ model = random_search.best_estimator_
 
 #model.predict_class(X_test)
 # %%
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+from sklearn.metrics import classification_report, confusion_matrix, ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
 predictions = model.predict(X_test)
 cm = confusion_matrix(y_test, predictions)
 disp = ConfusionMatrixDisplay(confusion_matrix=cm)
 disp.plot()
 plt.show()
+# %%
+
+print(classification_report(y_test, model.predict(X_test)))
 # %%
