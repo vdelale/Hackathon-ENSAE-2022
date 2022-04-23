@@ -1,4 +1,4 @@
-from PosterAnalysis import analyse_img_from_url
+from PosterAnalysisFile import analyse_img_from_url
 import pandas as pd
 from deepface import DeepFace
 from deepface.detectors import FaceDetector
@@ -16,7 +16,7 @@ imdb_df["imdb_id"] = imdb_df["imdb_id"].apply(lambda x: x[2:])
 merged_df = pd.merge(bechdel_df, imdb_df, left_on="imdbid", right_on="imdb_id")
 
 
-def PosterAnalysis(df=merged_df, save=False):
+def poster_analysis(df=merged_df, save=False):
 
     gender_detector = DeepFace.build_model("Gender")
     face_detector = FaceDetector.build_model(config["detector_backend"])

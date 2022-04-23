@@ -1,4 +1,3 @@
-from operator import ge
 from threading import Thread
 import numpy as np
 import requests

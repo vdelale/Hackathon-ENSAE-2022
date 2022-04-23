@@ -1,4 +1,3 @@
-from main import PosterAnalysis
+from main import poster_analysis
 
-__all__ = ["PosterAnalysis"]
-
+__all__ = ["poster_analysis"]
