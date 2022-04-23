@@ -4,9 +4,8 @@ import numpy as np
 from analysis.NLP_PCA import add_NLP_cols
 from sklearn.preprocessing import StandardScaler
 
-
 DATA_FOLDER = "data"
-N_PCA_NLP = 10 # Number of vectors in the PCA
+N_PCA_NLP = 30 # Number of vectors in the PCA
 YEARLY_INFLATION = 1.036
 
 
