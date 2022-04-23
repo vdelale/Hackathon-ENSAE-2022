@@ -17,7 +17,7 @@ gender_to_score = {
 }
 
 
-def add_infos(df, start_index=0, end_index=2000):
+def add_infos(df):
     """
     It takes a dataframe, and adds the directors, writers, and cast to the dataframe
 
@@ -26,16 +26,18 @@ def add_infos(df, start_index=0, end_index=2000):
     :param end_index: the index of the last movie you want to add info to, defaults to 2000 (optional)
     :return: A dataframe with the directors, writers, and cast added.
     """
-    data = df.copy().iloc[start_index:end_index, :]
+    data = df.copy()
+    data.index = range(0, len(data))
     data["directors"] = pd.NA
     data["writers"] = pd.NA
     data["cast"] = pd.NA
 
     movie_fetcher = Cinemagoer()
-    index = start_index
-    movie_ids = data["imdbid"].to_list()
+    index = 0
+    movie_ids = data["imdb_id"].to_list()
 
     for imdb_id in tqdm(movie_ids):
+        imdb_id = imdb_id[2:] 
         try:
             movie = movie_fetcher.get_movie_full_credits(imdb_id)
         except IMDbDataAccessError:
@@ -87,9 +89,7 @@ def genderAnalysis(df):
     :return: A dataframe with the gender scores for directors, writers, and cast.
     """
     detector = gg.Detector()
-    data = add_infos(df, start_index=0, end_index=8475)
-    data.dropna(inplace=True)
-    data[data["directors"].apply(lambda x: len(x.split("\n"))) > 10].head()
+    data = add_infos(df)
     df = data.copy()
 
     for col in ("directors", "writers", "cast"):
