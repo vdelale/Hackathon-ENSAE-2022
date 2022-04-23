@@ -1,4 +1,4 @@
-from PosterAnalysisFile import analyse_img_from_url
+from .PosterAnalysisFile import analyse_img_from_url
 import pandas as pd
 from deepface import DeepFace
 from deepface.detectors import FaceDetector
@@ -7,23 +7,23 @@ from tqdm import tqdm
 
 tqdm.pandas()
 
-with open("config.yml") as yml_file:
+with open("computer_vision/config.yml") as yml_file:
     config = yaml.safe_load(yml_file)
 
-bechdel_df = pd.read_json("bechdel_data.json")
-imdb_df = pd.read_json("tmdb_data.json")
-imdb_df["imdb_id"] = imdb_df["imdb_id"].apply(lambda x: x[2:])
-merged_df = pd.merge(bechdel_df, imdb_df, left_on="imdbid", right_on="imdb_id")
+# bechdel_df = pd.read_json("computer_vision/bechdel_data.json")
+# imdb_df = pd.read_json("computer_vision/tmdb_data.json")
+# imdb_df["imdb_id"] = imdb_df["imdb_id"].apply(lambda x: x[2:])
+# merged_df = pd.merge(bechdel_df, imdb_df, left_on="imdbid", right_on="imdb_id")
 
 
-def poster_analysis(df=merged_df, save=False):
+def poster_analysis(df, save=False):
 
     gender_detector = DeepFace.build_model("Gender")
     face_detector = FaceDetector.build_model(config["detector_backend"])
     age_detector = DeepFace.build_model("Age")
 
     if save:
-        for i in tqdm(range(0, len(merged_df) - 10, 10)):
+        for i in tqdm(range(0, len(df) - 10, 10)):
 
             line = df.iloc[i : i + 10, :]
             applied_df = line.apply(

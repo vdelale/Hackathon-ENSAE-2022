@@ -1,15 +1,12 @@
-from computer_vision import PosterAnalysis
+from computer_vision.main import poster_analysis
 import pandas as pd
 
-df = pd.DataFrame(
-    data=["0047034", "7816420", "10293406", "8356942", "2592084"], columns=["imdb_id"]
-)
-print(df)
+df = pd.read_json("data/tmdb_data.json")
+df = df.head()
 
 
 def preprocessing(df):
-    merged_df = PosterAnalysis(df)
-
+    merged_df = poster_analysis(df)
     return df
 
 
