@@ -7,7 +7,7 @@ from sentence_transformers import SentenceTransformer
 
 
 def add_NLP_cols(df, n_PCA):
-    print("Downloading pre-trained model...")
+    print("Downloading pre-trained NLP model...")
     model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
     print("Encoding sentences...")
     sentences = model.encode(df["overview"].values)

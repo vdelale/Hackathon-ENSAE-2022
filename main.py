@@ -8,7 +8,9 @@ from sklearn.preprocessing import StandardScaler
 
 df = pd.read_json("data/tmdb_data.json")
 df = df.head()
-clf = pickle.load("xgb_reg.pkl")
+with open("xgb_reg.pkl","rb") as f:
+    clf = pickle.load(f)
+
 
 N_PCA_NLP = 30  # Number of vectors in the PCA
 YEARLY_INFLATION = 1.036
@@ -105,6 +107,7 @@ def preprocessing(df):
 # require : imdb_id
 def predict_bechdel(df):
     df = preprocessing(df)
+    return clf.predict(df)
     
 
 if __name__ == "__main__":
