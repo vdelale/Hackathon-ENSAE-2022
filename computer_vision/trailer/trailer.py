@@ -1,9 +1,14 @@
-from imdb import Cinemagoer
+from sentence_transformers import SentenceTransformer
+from sklearn.preprocessing import StandardScaler
 
-# create an instance of the Cinemagoer class
-ia = Cinemagoer()
 
-# get a movie
-movie = ia.get_movie("0133093")
-print(movie["synopsis"])
+df['synopsis'] = 
+print("Downloading pre-trained model...")
+model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
+print("Encoding sentences...")
+sentences = model.encode(df["overview"].values)
+print("Done.")
+scaler = StandardScaler()
+X = scaler.fit_transform(sentences)
+
 
