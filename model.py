@@ -33,7 +33,9 @@ random_search = RandomizedSearchCV(clf,
                                    param_distributions=params,
                                    n_iter=n_iter_search, 
                                    cv=5,
-                                   verbose=3)
+                                   verbose=3,
+                                   scoring="accuracy",
+                                   n_jobs=-1)
 
 start = time.time()
 random_search.fit(X_train, y_train)
@@ -43,11 +45,22 @@ print("RandomizedSearchCV took %.2f seconds for %d candidates"
 # %%
 model = random_search.best_estimator_
 
-def predict_class(self, X):
-    out = self.predict(X)
-    return np.clip(np.round(out), 0, 3)
+#def predict_class(self, X):
+#    out = self.predict(X)
+#    return np.clip(np.round(out), 0, 3)
     
-model.predict_class = predict_class.__get__(model)
+#model.predict_class = predict_class.__get__(model)
 
-model.predict_class(X_test)
+#model.predict_class(X_test)
+# %%
+from sklearn.metrics import classification_report, confusion_matrix, ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
+predictions = model.predict(X_test)
+cm = confusion_matrix(y_test, predictions)
+disp = ConfusionMatrixDisplay(confusion_matrix=cm)
+disp.plot()
+plt.show()
+# %%
+
+print(classification_report(y_test, model.predict(X_test)))
 # %%
