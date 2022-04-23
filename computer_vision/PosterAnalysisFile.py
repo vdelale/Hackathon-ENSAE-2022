@@ -10,7 +10,7 @@ with open("computer_vision/config.yml") as yml_file:
     config = yaml.safe_load(yml_file)
 
 
-def analyse_one_face_task(face: np.ndarray, outputs, gender_detector, age_detector):
+def analyse_one_face_task(face, outputs, gender_detector, age_detector):
     """
     It takes a face image and returns a list of 4 values:
 
@@ -43,7 +43,7 @@ def analyse_one_face_task(face: np.ndarray, outputs, gender_detector, age_detect
     outputs.append(one_face_analyse)
 
 
-def get_image(poster_path: str) -> np.ndarray:
+def get_image(poster_path: str):
     """
     It takes a poster path, and returns the image as a numpy array
 
@@ -55,7 +55,7 @@ def get_image(poster_path: str) -> np.ndarray:
     return np.asarray(Image.open(requests.get(url, stream=True).raw))
 
 
-def analyse_img(img: np.ndarray, gender_detector, face_detector, age_detector) -> list:
+def analyse_img(img, gender_detector, face_detector, age_detector):
     """
     It takes an image as input and returns a list of the image's properties.
 
@@ -80,9 +80,7 @@ def analyse_img(img: np.ndarray, gender_detector, face_detector, age_detector) -
     return outputs
 
 
-def clean_outputs(
-    face_analysis_results, w_img: int, l_img: int
-) -> tuple[int, int, float, float]:
+def clean_outputs(face_analysis_results, w_img: int, l_img: int):
     """
     It takes a list of tuples, and returns a tuple of four integers
 
@@ -109,7 +107,7 @@ def clean_outputs(
 
 def analyse_img_from_url(
     poster_path: str, face_detector, gender_detector, age_detector
-) -> tuple[int, int, float, float]:
+):
     """
     It takes a URL, downloads the image, and then runs the image through the model
 

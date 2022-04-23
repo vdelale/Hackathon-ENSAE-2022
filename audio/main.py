@@ -39,21 +39,31 @@ def calculate_ratio(row, i):
     df1 = df.groupby(by="labels").sum()
     os.remove(f"{i}.mp4")
     if "female" not in df1.index.unique():
-        return row.loc["imdb_id"], 0
+        return 0
     else:
-        return row.loc["imdb_id"], df1.loc["female", "delay"] / df1.loc["male", "delay"]
+        return df1.loc["female", "delay"] / df1.loc["male", "delay"]
 
 
-def run():
-    bechdel_df = pd.read_json("bechdel_data.json")
-    imdb_df = pd.read_json("tmdb_data.json")
-    imdb_df["imdb_id"] = imdb_df["imdb_id"].apply(lambda x: x[2:])
-    merged_df = pd.merge(bechdel_df, imdb_df, left_on="imdbid", right_on="imdb_id")
+def audiofy(df):
+
     i = 0
-    applied_df = merged_df.apply(lambda row: calculate_ratio(row, i + 1), axis=1)
+    applied_df = df.apply(
+        lambda row: (row.loc["imdb_id"], calculate_ratio(row, i + 1)),
+        axis="columns",
+        result_type="expand",
+    )
 
     applied_df.columns = ["imdb_id", "ratio"]
+    df = pd.concat([df, applied_df], axis="columns")
+    return df
 
 
 if __name__ == "__main__":
-    run()
+    bechdel_df = pd.read_json("bechdel_data.json")
+    imdb_df = pd.read_json("tmdb_data.json")
+    imdb_df["imdb_id"] = imdb_df["imdb_id"].apply(lambda x: x[2:])
+    merged_df = pd.merge(
+        bechdel_df, imdb_df, left_on="imdbid", right_on="imdb_id"
+    ).head(2)
+    n_df = audiofy(df=merged_df)
+    print(n_df)

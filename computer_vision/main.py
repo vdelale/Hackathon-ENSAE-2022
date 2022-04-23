@@ -50,20 +50,17 @@ def poster_analysis(df, save=False):
                 applied_df.to_csv(csv_file, header=False, index=False)
     else:
         applied_df = df.progress_apply(
-            lambda row: (
-                row["imdb_id"],
-                *analyse_img_from_url(
-                    row["poster_path"],
-                    gender_detector=gender_detector,
-                    face_detector=face_detector,
-                    age_detector=age_detector,
-                ),
+            lambda row: analyse_img_from_url(
+                row["poster_path"],
+                gender_detector=gender_detector,
+                face_detector=face_detector,
+                age_detector=age_detector,
             ),
             axis="columns",
             result_type="expand",
         )
 
-        applied_df.columns = ["imdb_id", "nb_women", "nb_men", "area_women", "area_men"]
+        applied_df.columns = ["nb_women", "nb_men", "area_women", "area_men"]
         df = pd.concat([df, applied_df], axis="columns")
 
     return df
