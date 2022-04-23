@@ -93,6 +93,8 @@ columns_to_maybe_add_back = ["production_companies",
                              "production_countries"]
 
 df = df.drop(columns=columns_to_remove + columns_to_maybe_add_back)
+
+df.to_csv('data/final_database.csv', index=False)
 # %%
 columns_to_scale = ["year",
                     "budget",
@@ -115,5 +117,3 @@ columns_to_scale = ["year",
 scaler = StandardScaler()
 df[columns_to_scale] = scaler.fit_transform(df[columns_to_scale])
 # %%
-
-df.to_csv('final_database.csv', index=False)
