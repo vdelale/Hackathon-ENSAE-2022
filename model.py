@@ -48,7 +48,7 @@ print("RandomizedSearchCV took %.2f seconds for %d candidates"
 # %%
 model = random_search.best_estimator_
 from joblib import dump, load
-dump(clf, 'balanced_65_60.joblib') 
+dump(clf, 'accuracy_65_61.joblib') 
 
 #def predict_class(self, X):
 #    out = self.predict(X)
