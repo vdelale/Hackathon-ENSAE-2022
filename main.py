@@ -7,9 +7,10 @@ from analysis.NLP_PCA import add_NLP_cols
 from sklearn.preprocessing import StandardScaler
 
 df = pd.read_json("data/tmdb_data.json")
-df = df.head()
+df = df.head(31)
 with open("xgb_reg.pkl","rb") as f:
     clf = pickle.load(f)
+    print(clf)
 
 
 N_PCA_NLP = 30  # Number of vectors in the PCA
@@ -19,8 +20,8 @@ genres_global = []
 def preprocessing(df):
     global genres_global
     merged_df = poster_analysis(df)
-    merged_df = add_infos(merged_df)
     merged_df = genderAnalysis(merged_df)
+    print(merged_df.columns)
     merged_df = add_NLP_cols(merged_df, N_PCA_NLP)
     
     def parse_genres(x):
@@ -43,14 +44,12 @@ def preprocessing(df):
     merged_df["collection"] = merged_df["belongs_to_collection"] is None
     merged_df["revenue_is_available"] = merged_df["revenue"] != 0
     merged_df["budget is available"] = merged_df["budget"] != 0
+    merged_df["year"] = pd.to_datetime(merged_df["release_date"]).dt.year.astype(int)
     merged_df["budget"] = merged_df["budget"] * (YEARLY_INFLATION ** (2022 - merged_df["year"]))
     merged_df["revenue"] = merged_df["revenue"] * (YEARLY_INFLATION ** (2022 - merged_df["year"]))
     
     columns_to_remove = [
-        "title_x",
-        "imdbid",
-        "imbdid",
-        "id_x",
+        "title",
         "adult",
         "imdb_id",
         "overview",
@@ -59,7 +58,6 @@ def preprocessing(df):
         "Genres",
         "belongs_to_collection",
         "homepage",
-        "id_y",
         "original_language",
         "original_title",
         "poster_path",
@@ -67,11 +65,11 @@ def preprocessing(df):
         "video",
         "spoken_languages",
         "tagline",
-        "title_y",
         "release_date",
         "directors",
         "writers",
         "cast",
+        "id"
     ]
 
     columns_to_maybe_add_back = ["production_companies", "production_countries"]
@@ -107,6 +105,9 @@ def preprocessing(df):
 # require : imdb_id
 def predict_bechdel(df):
     df = preprocessing(df)
+    print(df.columns)
+    print(df.isna().any())
+    print(df.dtypes)
     return clf.predict(df)
     
 
