@@ -84,7 +84,10 @@ columns_to_remove = ["title_x",
                      "spoken_languages",
                      "tagline", 
                      "title_y",
-                     "release_date"]
+                     "release_date",
+                     "directors",
+                     "writers",
+                     "cast"]
 
 columns_to_maybe_add_back = ["production_companies",
                              "production_countries"]
@@ -99,9 +102,6 @@ columns_to_scale = ["year",
                     "vote_average",
                     "vote_count",
                     "release_month",
-                    "directors",
-                    "writers",
-                    "cast", 
                     'directors_male', 
                     'directors_female', 
                     'writers_male', 
