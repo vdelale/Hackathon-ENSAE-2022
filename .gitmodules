@@ -1,0 +1,3 @@
+[submodule "audio/pytube"]
+	path = audio/pytube
+	url = https://github.com/pytube/pytube.git
