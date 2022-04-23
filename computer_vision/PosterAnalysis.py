@@ -7,7 +7,7 @@ from deepface import DeepFace
 from deepface.detectors import FaceDetector
 from PIL import Image
 
-with open("config.yml") as yml_file:
+with open("computer_vision/config.yml") as yml_file:
     config = yaml.safe_load(yml_file)
 
 

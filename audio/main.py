@@ -34,12 +34,10 @@ def calculate_ratio(row, i):
         only_audio=True, file_extension="mp4"
     ).first().download(filename=f"{str(i)}.mp4")
     segmentation = Segmenter()(f"{i}.mp4")
-    seg2csv(segmentation, f"{i}.csv")
-    df = pd.read_csv(f"{i}.csv", sep="\t")
+    df = pd.DataFrame.from_records(segmentation, columns=["labels", "start", "stop"])
     df["delay"] = df.stop - df.start
     df1 = df.groupby(by="labels").sum()
     os.remove(f"{i}.mp4")
-    os.remove(f"{i}.csv")
     if "female" not in df1.index.unique():
         return row.loc["imdb_id"], 0
     else:
