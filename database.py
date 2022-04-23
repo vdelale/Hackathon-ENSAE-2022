@@ -2,10 +2,12 @@
 import pandas as pd
 import numpy as np
 from analysis.NLP_PCA import add_NLP_cols
+from sklearn.preprocessing import StandardScaler
 
 
 DATA_FOLDER = "data"
 N_PCA_NLP = 10 # Number of vectors in the PCA
+YEARLY_INFLATION = 1.036
 
 
 df_bechdel = pd.read_json("data/bechdel_data.json")
@@ -37,12 +39,17 @@ df["Genres"] = df["genres"].apply(parse_genres)
 for genre in genres_global:
     df[f"Is_" + genre] = df["Genres"].apply(lambda x: genre in x)
     
+
+def inflation(row):
+    return row["budget"] * (YEARLY_INFLATION ** (2022-row["year"]))
+
 #%% NLP analysis + PCA
-
-
 df["release_month"] = pd.to_datetime(df["release_date"]).dt.month
 df["collection"] = (df["belongs_to_collection"] is None)
 df["revenue_is_available"] = (df["revenue"] != 0)
+df["budget is available"] = (df["budget"] != 0)
+df["budget"] = df["budget"] * (YEARLY_INFLATION ** (2022-df["year"]))
+df["revenue"] = df["revenue"] * (YEARLY_INFLATION ** (2022-df["year"]))
 columns_to_remove = ["title_x", 
                      "imdbid", 
                      "id_x",
@@ -52,9 +59,7 @@ columns_to_remove = ["title_x",
                      "backdrop_path", 
                      "genres", 
                      "Genres", 
-                     "budget", 
                      "belongs_to_collection", 
-                     "budget", 
                      "homepage", 
                      "id_y", 
                      "original_language", 
@@ -71,4 +76,15 @@ columns_to_maybe_add_back = ["production_companies",
                              "production_countries"]
 
 df = df.drop(columns=columns_to_remove + columns_to_maybe_add_back)
+# %%
+columns_to_scale = ["year",
+                    "budget",
+                    "popularity",
+                    "revenue",
+                    "runtime",
+                    "vote_average",
+                    "vote_count",
+                    "release_month"]
+scaler = StandardScaler()
+df[columns_to_scale] = scaler.fit_transform(df[columns_to_scale])
 # %%
