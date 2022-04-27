@@ -48,8 +48,8 @@ The classes to predict are as such:
 ### The data:
 
 - We gathered data from The Movie DataBase ([TMDB](https://www.themoviedb.org/?language=fr)) to get info about actors, producers, writers and such. 
-- We used the movies' posters to determine the number of women on them and the relative size of women on the posters using [DeepFace](https://github.com/serengil/deepface). 
-- We used audio recognition on youtube videos of the movies' trailers to get the proportion of women's speech in them.
+- We used the movies' posters to determine the number of women on them and the relative size of women on the posters using [DeepFace](https://github.com/serengil/deepface) and more especially using RetinaNet Backend and FaceNet128. 
+- We used audio recognition on youtube videos of the movies' trailers to get the proportion of women's speech in them. Audio was scrapped using fixed [pytube](https://github.com/pytube/pytube) and the audio segmentation was done with [inaSpeechSegmenter](https://github.com/ina-foss/inaSpeechSegmenter).
 - We used NLP on the movies' synopsis and PCA analysis to get insights from the plots.
 
 ### The model:
