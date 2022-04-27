@@ -35,7 +35,7 @@ This team was awarded the first place
 
 ### The goal:
 
-Given basic data about a movie ([IMDb](https://www.imdb.com) id), determine whether it will pass the [Bechdel test](https://en.wikipedia.org/wiki/Bechdel_test).
+Given basic data about a movie ([IMDb](https://www.imdb.com) id), determine whether it will pass the [Bechdel test](https://en.wikipedia.org/wiki/Bechdel_test) or not.
 The classes to predict are as such:
 
 | **Level** |                      **Description**                      |
