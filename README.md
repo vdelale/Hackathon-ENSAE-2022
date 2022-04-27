@@ -7,12 +7,12 @@ This team was awarded the first place
 
 
 ### The team:
-- Martin Alexandre  [![linkedin](https://user-images.githubusercontent.com/60552083/165544757-8f416a85-cffa-4d00-893a-17320fe3f5cc.png)][1]  [![github](https://user-images.githubusercontent.com/60552083/165544915-a08ba7be-d76a-48f7-8d2c-f09ee9b273a1.png)][2] 
-- Camille Ballu[ ![linkedin](https://user-images.githubusercontent.com/60552083/165544757-8f416a85-cffa-4d00-893a-17320fe3f5cc.png)][3]  [![github](https://user-images.githubusercontent.com/60552083/165544915-a08ba7be-d76a-48f7-8d2c-f09ee9b273a1.png)][4] 
-- Vincent Delale [![linkedin](https://user-images.githubusercontent.com/60552083/165544757-8f416a85-cffa-4d00-893a-17320fe3f5cc.png)][5]  [![github](https://user-images.githubusercontent.com/60552083/165544915-a08ba7be-d76a-48f7-8d2c-f09ee9b273a1.png)][6] 
-- Thomas Kientz [![linkedin](https://user-images.githubusercontent.com/60552083/165544757-8f416a85-cffa-4d00-893a-17320fe3f5cc.png)][7]  [![github](https://user-images.githubusercontent.com/60552083/165544915-a08ba7be-d76a-48f7-8d2c-f09ee9b273a1.png)][8] 
+- Martin Alexandre  [![linkedin](https://user-images.githubusercontent.com/60552083/165544757-8f416a85-cffa-4d00-893a-17320fe3f5cc.png)][1]  [![github](https://user-images.githubusercontent.com/60552083/165557096-3b39cddb-c5ee-4228-8137-c69d37b56f66.jpg)][2] 
+- Camille Ballu[ ![linkedin](https://user-images.githubusercontent.com/60552083/165544757-8f416a85-cffa-4d00-893a-17320fe3f5cc.png)][3]  [![github](https://user-images.githubusercontent.com/60552083/165557096-3b39cddb-c5ee-4228-8137-c69d37b56f66.jpg)][4] 
+- Vincent Delale [![linkedin](https://user-images.githubusercontent.com/60552083/165544757-8f416a85-cffa-4d00-893a-17320fe3f5cc.png)][5]  [![github](https://user-images.githubusercontent.com/60552083/165557096-3b39cddb-c5ee-4228-8137-c69d37b56f66.jpg)][6] 
+- Thomas Kientz [![linkedin](https://user-images.githubusercontent.com/60552083/165544757-8f416a85-cffa-4d00-893a-17320fe3f5cc.png)][7]  [![github](https://user-images.githubusercontent.com/60552083/165557096-3b39cddb-c5ee-4228-8137-c69d37b56f66.jpg)][8] 
 - Alexandre Quéant [![linkedin](https://user-images.githubusercontent.com/60552083/165544757-8f416a85-cffa-4d00-893a-17320fe3f5cc.png)][9]
-- Lucas Saban [![linkedin](https://user-images.githubusercontent.com/60552083/165544757-8f416a85-cffa-4d00-893a-17320fe3f5cc.png)][11]  [![github](https://user-images.githubusercontent.com/60552083/165544915-a08ba7be-d76a-48f7-8d2c-f09ee9b273a1.png)][12] 
+- Lucas Saban [![linkedin](https://user-images.githubusercontent.com/60552083/165544757-8f416a85-cffa-4d00-893a-17320fe3f5cc.png)][11]  [![github](https://user-images.githubusercontent.com/60552083/165557096-3b39cddb-c5ee-4228-8137-c69d37b56f66.jpg)][12] 
 
 [1]: https://www.linkedin.com/in/martin-alexandre-4b48511b4/
 [2]: https://github.com/martinalex7
@@ -61,7 +61,7 @@ We used XGBoost and hyperparameters tuning in sklearn for the final model.
 Confusion matrix of the `XGBClassifier` on the test set (20% of the 8000+ movies):
 
 
-<img width="500" alt="Confusion matrix" src="matrice.png">
+<img width="500" alt="Confusion matrix" src="matrice_fondblanc.png">
 
 Most relevant features:
 
