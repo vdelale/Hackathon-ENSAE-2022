@@ -61,7 +61,7 @@ We used XGBoost and hyperparameters tuning in sklearn for the final model.
 Confusion matrix of the `XGBClassifier` on the test set (20% of the 8000+ movies):
 
 
-<img width="500" alt="Confusion matrix" src="matrice_fondblanc.png">
+<img width="500" alt="Confusion matrix" src="ressources/matrice_fondblanc.png">
 
 Most relevant features:
 
